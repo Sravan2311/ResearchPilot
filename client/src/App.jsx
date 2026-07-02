@@ -793,7 +793,7 @@ function App() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
           
           {/* Horizontal Upload Panel */}
-          <div className="glass-panel" style={{ display: 'flex', flexDirection: 'row', gap: '2rem', alignItems: 'center', flexWrap: 'wrap', padding: '1.5rem 2rem' }}>
+          <div className="glass-panel" style={{ display: 'flex', flexDirection: 'row', gap: '2rem', alignItems: 'center', flexWrap: 'wrap', padding: 'clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem)' }}>
             <div style={{ flex: '1 1 300px' }}>
               <h2 className="agent-monitor-title" style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Layers size={18} style={{ color: 'var(--primary)' }} />
@@ -995,7 +995,7 @@ function App() {
 
       {currentView === 'about' && (
         <div style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', paddingRight: '4px' }} className="contact-scroll">
-          <div className="glass-panel" style={{ width: '100%', padding: '3rem', animation: 'slideIn 0.35s ease', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+          <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1.25rem, 5vw, 3rem)', animation: 'slideIn 0.35s ease', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             
             {/* Header section */}
             <div>
@@ -1107,7 +1107,7 @@ function App() {
       )}
 
       {currentView === 'history' && (
-        <div className="glass-panel" style={{ width: '100%', padding: '2.5rem', animation: 'slideIn 0.35s ease' }}>
+        <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease' }}>
           <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', marginBottom: '1.25rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <History style={{ color: 'var(--accent)' }} />
             Your Research History
@@ -1204,7 +1204,7 @@ function App() {
       )}
 
       {currentView === 'monitor' && (
-        <div className="glass-panel" style={{ width: '100%', padding: '2.5rem', animation: 'slideIn 0.35s ease' }}>
+        <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
             <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
               <Cpu className={loading ? "rotating-icon" : ""} style={{ color: 'var(--secondary)' }} />
@@ -1245,7 +1245,7 @@ function App() {
 
       {currentView === 'contact' && (
         <div style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', paddingRight: '4px' }} className="contact-scroll">
-          <div className="glass-panel" style={{ width: '100%', padding: '2.5rem', animation: 'slideIn 0.35s ease', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+          <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
             
             {/* Left Column: Professional Details */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
@@ -1424,7 +1424,7 @@ function App() {
 
       {currentView === 'profile' && (
         <div style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', paddingRight: '4px' }} className="contact-scroll">
-          <div className="glass-panel" style={{ width: '100%', padding: '3rem', animation: 'slideIn 0.35s ease', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+          <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1.25rem, 5vw, 3rem)', animation: 'slideIn 0.35s ease', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             
             {/* Header section */}
             <div>
