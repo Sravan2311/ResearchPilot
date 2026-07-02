@@ -46,6 +46,10 @@ class ResetPasswordSchema(BaseModel):
     old_password: str
     new_password: str
 
+class ForgotPasswordSchema(BaseModel):
+    email: EmailStr
+    new_password: str
+
 class UpdateProfileSchema(BaseModel):
     full_name: Optional[str] = ""
     institution: Optional[str] = ""
@@ -152,6 +156,22 @@ def reset_password(data: ResetPasswordSchema, current_user: dict = Depends(get_c
     return {
         "success": True,
         "message": "Password updated successfully."
+    }
+
+@app.post("/api/auth/forgot-password")
+def forgot_password(data: ForgotPasswordSchema):
+    user = db.users.find_one({"email": data.email})
+    if not user:
+        raise HTTPException(status_code=404, detail="No user registered with this email address.")
+        
+    hashed_new = hash_password(data.new_password)
+    db.users.update_one(
+        {"_id": user["_id"]},
+        {"$set": {"password": hashed_new}}
+    )
+    return {
+        "success": True,
+        "message": "Password reset completed successfully. Please sign in with your new password!"
     }
 
 @app.get("/api/auth/profile")

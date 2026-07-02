@@ -36,6 +36,7 @@ function App() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
   const [isRegister, setIsRegister] = useState(false);
+  const [isForgot, setIsForgot] = useState(false);
   const [authError, setAuthError] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
 
@@ -253,6 +254,36 @@ function App() {
       }
     } catch (err) {
       setAuthError(err.message);
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleForgotPasswordSubmit = async (e) => {
+    e.preventDefault();
+    setAuthError('');
+    setAuthLoading(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/auth/forgot-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formEmail,
+          new_password: formPassword
+        })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        addNotification('Password reset successfully! Please sign in with your new password.', 'success');
+        setIsForgot(false);
+        setFormPassword('');
+      } else {
+        setAuthError(data.detail || 'Failed to reset password.');
+      }
+    } catch (err) {
+      setAuthError('Connection error while resetting password.');
     } finally {
       setAuthLoading(false);
     }
@@ -521,72 +552,150 @@ function App() {
             </p>
           </div>
 
-          <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            {authError && (
-              <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid var(--error)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.85rem' }}>
-                <AlertCircle size={16} style={{ color: 'var(--error)' }} />
-                <span style={{ color: 'var(--error)', fontWeight: 500 }}>{authError}</span>
+          {isForgot ? (
+            <>
+              <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 700, margin: 0 }}>
+                  Reset Your Password
+                </h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.35rem' }}>
+                  Enter your registered email address and choose your new password.
+                </p>
               </div>
-            )}
 
-            {isRegister && (
-              <div style={{ position: 'relative' }}>
-                <User size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                <input 
-                  type="text" 
-                  placeholder="Username" 
-                  required
-                  className="input-pill" 
-                  style={{ width: '100%', paddingLeft: '2.5rem' }}
-                  value={formUsername}
-                  onChange={(e) => setFormUsername(e.target.value)}
-                />
+              <form onSubmit={handleForgotPasswordSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {authError && (
+                  <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid var(--error)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.85rem' }}>
+                    <AlertCircle size={16} style={{ color: 'var(--error)' }} />
+                    <span style={{ color: 'var(--error)', fontWeight: 500 }}>{authError}</span>
+                  </div>
+                )}
+
+                <div style={{ position: 'relative' }}>
+                  <Mail size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <input 
+                    type="email" 
+                    placeholder="Registered Email Address" 
+                    required
+                    className="input-pill" 
+                    style={{ width: '100%', paddingLeft: '2.5rem' }}
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                  />
+                </div>
+
+                <div style={{ position: 'relative' }}>
+                  <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <input 
+                    type="password" 
+                    placeholder="New Password" 
+                    required
+                    className="input-pill" 
+                    style={{ width: '100%', paddingLeft: '2.5rem' }}
+                    value={formPassword}
+                    onChange={(e) => setFormPassword(e.target.value)}
+                  />
+                </div>
+
+                <button type="submit" className="btn-action" disabled={authLoading} style={{ marginTop: '0.5rem' }}>
+                  {authLoading ? 'Updating Password...' : 'Reset Password'}
+                </button>
+              </form>
+
+              <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem' }}>
+                <button 
+                  className="tab-button" 
+                  style={{ color: 'var(--primary)', padding: 0, border: 'none', borderBottom: '1px dashed var(--primary)', fontSize: '0.85rem' }}
+                  onClick={() => { setIsForgot(false); setAuthError(''); }}
+                >
+                  Back to Sign In
+                </button>
               </div>
-            )}
+            </>
+          ) : (
+            <>
+              <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {authError && (
+                  <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid var(--error)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.85rem' }}>
+                    <AlertCircle size={16} style={{ color: 'var(--error)' }} />
+                    <span style={{ color: 'var(--error)', fontWeight: 500 }}>{authError}</span>
+                  </div>
+                )}
 
-            <div style={{ position: 'relative' }}>
-              <Mail size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                required
-                className="input-pill" 
-                style={{ width: '100%', paddingLeft: '2.5rem' }}
-                value={formEmail}
-                onChange={(e) => setFormEmail(e.target.value)}
-              />
-            </div>
+                {isRegister && (
+                  <div style={{ position: 'relative' }}>
+                    <User size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                    <input 
+                      type="text" 
+                      placeholder="Username" 
+                      required
+                      className="input-pill" 
+                      style={{ width: '100%', paddingLeft: '2.5rem' }}
+                      value={formUsername}
+                      onChange={(e) => setFormUsername(e.target.value)}
+                    />
+                  </div>
+                )}
 
-            <div style={{ position: 'relative' }}>
-              <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-              <input 
-                type="password" 
-                placeholder="Password" 
-                required
-                className="input-pill" 
-                style={{ width: '100%', paddingLeft: '2.5rem' }}
-                value={formPassword}
-                onChange={(e) => setFormPassword(e.target.value)}
-              />
-            </div>
+                <div style={{ position: 'relative' }}>
+                  <Mail size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    required
+                    className="input-pill" 
+                    style={{ width: '100%', paddingLeft: '2.5rem' }}
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                  />
+                </div>
 
-            <button type="submit" className="btn-action" disabled={authLoading} style={{ marginTop: '0.5rem' }}>
-              {authLoading ? 'Please wait...' : (isRegister ? 'Create Account' : 'Sign In')}
-            </button>
-          </form>
+                <div style={{ position: 'relative' }}>
+                  <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <input 
+                    type="password" 
+                    placeholder="Password" 
+                    required
+                    className="input-pill" 
+                    style={{ width: '100%', paddingLeft: '2.5rem' }}
+                    value={formPassword}
+                    onChange={(e) => setFormPassword(e.target.value)}
+                  />
+                </div>
 
-          <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem' }}>
-            <span style={{ color: 'var(--text-secondary)' }}>
-              {isRegister ? 'Already have an account?' : "Don't have an account?"}
-            </span>{' '}
-            <button 
-              className="tab-button" 
-              style={{ color: 'var(--primary)', padding: 0, border: 'none', borderBottom: '1px dashed var(--primary)', fontSize: '0.85rem' }}
-              onClick={() => { setIsRegister(!isRegister); setAuthError(''); }}
-            >
-              {isRegister ? 'Sign In' : 'Sign Up'}
-            </button>
-          </div>
+                {!isRegister && (
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-0.75rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => { setIsForgot(true); setIsRegister(false); setAuthError(''); }}
+                      style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: '0.8rem', cursor: 'pointer', transition: 'var(--transition-fast)' }}
+                      onMouseEnter={(e) => e.target.style.color = 'var(--primary)'}
+                      onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
+                )}
+
+                <button type="submit" className="btn-action" disabled={authLoading} style={{ marginTop: '0.5rem' }}>
+                  {authLoading ? 'Please wait...' : (isRegister ? 'Create Account' : 'Sign In')}
+                </button>
+              </form>
+
+              <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem' }}>
+                <span style={{ color: 'var(--text-secondary)' }}>
+                  {isRegister ? 'Already have an account?' : "Don't have an account?"}
+                </span>{' '}
+                <button 
+                  className="tab-button" 
+                  style={{ color: 'var(--primary)', padding: 0, border: 'none', borderBottom: '1px dashed var(--primary)', fontSize: '0.85rem' }}
+                  onClick={() => { setIsRegister(!isRegister); setAuthError(''); }}
+                >
+                  {isRegister ? 'Sign In' : 'Sign Up'}
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
