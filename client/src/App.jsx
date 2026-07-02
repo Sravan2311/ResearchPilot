@@ -1429,7 +1429,7 @@ function App() {
             {/* Header section */}
             <div>
               <span style={{ textTransform: 'uppercase', fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.4rem' }}>User Settings</span>
-              <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2.2rem', margin: 0, color: 'var(--text-primary)', lineHeight: '1.25', fontWeight: 800 }}>
+              <h2 style={{ fontFamily: 'var(--font-title)', fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', margin: 0, color: 'var(--text-primary)', lineHeight: '1.25', fontWeight: 800 }}>
                 Profile Settings
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', marginTop: '0.85rem', maxWidth: '650px' }}>
@@ -1437,10 +1437,10 @@ function App() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 'clamp(1.5rem, 5vw, 2.5rem)', alignItems: 'start' }}>
               
               {/* Left Column: Profile metadata form */}
-              <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: '2rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: 'clamp(1rem, 4vw, 2rem)', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)', fontWeight: 700, borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.75rem' }}>
                   Academic Credentials
                 </h3>
@@ -1522,7 +1522,7 @@ function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 
                 {/* Password Reset Form Card */}
-                <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: '2rem', borderRadius: 'var(--radius-md)' }}>
+                <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: 'clamp(1rem, 4vw, 2rem)', borderRadius: 'var(--radius-md)' }}>
                   <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', margin: '0 0 1.25rem 0', color: 'var(--text-primary)', fontWeight: 700, borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.75rem' }}>
                     Account Security
                   </h3>
@@ -1566,7 +1566,7 @@ function App() {
                 </div>
 
                 {/* Account Details & Stats Card */}
-                <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: '1.5rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: 'clamp(1rem, 3.5vw, 1.5rem)', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <h4 style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
                     Account Metadata
                   </h4>
