@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+dist/
+build/
+.env
+backend/.env
+client/.env
+
+# Python caching & environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Uploaded research PDFs
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Logs and system files
+*.log
+.system_generated/
+.gemini/
+.agents/
+.DS_Store
+Thumbs.db
