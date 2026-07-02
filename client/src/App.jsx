@@ -24,7 +24,8 @@ import {
   Award,
   Info,
   MessageSquare,
-  Send
+  Send,
+  MoreVertical
 } from 'lucide-react';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
@@ -64,6 +65,7 @@ function App() {
 
   // Profile and Password Reset State
   const [showProfile, setShowProfile] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [resetPasswordLoading, setResetPasswordLoading] = useState(false);
@@ -615,6 +617,7 @@ function App() {
               onClick={() => {
                 setShowProfile(!showProfile);
                 setShowSettings(false);
+                setShowMobileMenu(false);
               }}
             >
               <User size={15} style={{ color: 'var(--primary)' }} />
@@ -677,6 +680,7 @@ function App() {
               onClick={() => {
                 setShowSettings(!showSettings);
                 setShowProfile(false);
+                setShowMobileMenu(false);
               }}
             >
               <Settings size={16} />
@@ -730,6 +734,82 @@ function App() {
                     />
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button (Three Dots) */}
+          <div className="mobile-menu-container" style={{ position: 'relative' }}>
+            <button 
+              className="input-pill mobile-menu-btn" 
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '0.55rem', background: showMobileMenu ? 'var(--bg-tertiary)' : 'var(--glass-bg)' }}
+              onClick={() => {
+                setShowMobileMenu(!showMobileMenu);
+                setShowSettings(false);
+                setShowProfile(false);
+              }}
+            >
+              <MoreVertical size={18} />
+            </button>
+
+            {showMobileMenu && (
+              <div 
+                className="glass-panel mobile-nav-dropdown"
+                style={{ 
+                  position: 'absolute', 
+                  top: 'calc(100% + 0.75rem)', 
+                  right: 0, 
+                  width: '200px', 
+                  padding: '0.75rem', 
+                  zIndex: 1010, 
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.4rem'
+                }}
+              >
+                <button 
+                  className={`nav-link ${currentView === 'dashboard' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('dashboard'); setShowMobileMenu(false); }}
+                >
+                  <Layers size={14} />
+                  <span>Dashboard</span>
+                </button>
+                <button 
+                  className={`nav-link ${currentView === 'history' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('history'); setShowMobileMenu(false); }}
+                >
+                  <History size={14} />
+                  <span>Research History</span>
+                </button>
+                <button 
+                  className={`nav-link ${currentView === 'monitor' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('monitor'); setShowMobileMenu(false); }}
+                >
+                  <Cpu size={14} />
+                  <span>Agent Monitor</span>
+                </button>
+                <button 
+                  className={`nav-link ${currentView === 'about' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('about'); setShowMobileMenu(false); }}
+                >
+                  <Info size={14} />
+                  <span>About System</span>
+                </button>
+                <button 
+                  className={`nav-link ${currentView === 'contact' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('contact'); setShowMobileMenu(false); }}
+                >
+                  <MessageSquare size={14} />
+                  <span>Contact</span>
+                </button>
+                <button 
+                  className={`nav-link ${currentView === 'profile' ? 'active' : ''}`}
+                  onClick={() => { setCurrentView('profile'); fetchUserProfile(); setShowMobileMenu(false); }}
+                >
+                  <User size={14} />
+                  <span>User Profile</span>
+                </button>
               </div>
             )}
           </div>
