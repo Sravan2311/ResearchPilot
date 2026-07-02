@@ -1245,13 +1245,13 @@ function App() {
 
       {currentView === 'contact' && (
         <div style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', paddingRight: '4px' }} className="contact-scroll">
-          <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+          <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 'clamp(1.5rem, 5vw, 2.5rem)', alignItems: 'start' }}>
             
             {/* Left Column: Professional Details */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               <div>
                 <span style={{ textTransform: 'uppercase', fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.12em', display: 'block', marginBottom: '0.4rem' }}>Feedback & Assistance</span>
-                <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2.2rem', margin: 0, color: 'var(--text-primary)', lineHeight: '1.25', fontWeight: 800 }}>
+                <h2 style={{ fontFamily: 'var(--font-title)', fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', margin: 0, color: 'var(--text-primary)', lineHeight: '1.25', fontWeight: 800 }}>
                   Discuss Academic Heuristics & Scope.
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', lineHeight: '1.6', marginTop: '0.85rem' }}>
@@ -1312,7 +1312,7 @@ function App() {
             </div>
 
             {/* Right Column: Contact & Message Form */}
-            <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: '2rem', borderRadius: 'var(--radius-md)', boxShadow: '0 4px 30px rgba(0,0,0,0.2)' }}>
+            <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid var(--glass-border)', padding: 'clamp(1rem, 4vw, 2rem)', borderRadius: 'var(--radius-md)', boxShadow: '0 4px 30px rgba(0,0,0,0.2)' }}>
               <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.35rem', margin: '0 0 1.25rem 0', color: 'var(--text-primary)', fontWeight: 700 }}>
                 Submit Admin Ticket
               </h3>
