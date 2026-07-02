@@ -1108,7 +1108,7 @@ function App() {
 
       {currentView === 'history' && (
         <div className="glass-panel" style={{ width: '100%', padding: 'clamp(1rem, 5vw, 2.5rem)', animation: 'slideIn 0.35s ease' }}>
-          <h2 style={{ fontFamily: 'var(--font-title)', fontSize: '2rem', marginBottom: '1.25rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-title)', fontSize: 'clamp(1.35rem, 5vw, 2rem)', marginBottom: '1.25rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <History style={{ color: 'var(--accent)' }} />
             Your Research History
           </h2>
@@ -1116,7 +1116,7 @@ function App() {
             Browse and reload your past literature survey dossiers and extracted research gaps.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))', gap: '1.25rem' }}>
             {historyLoading ? (
               <div style={{ color: 'var(--text-secondary)', padding: '2rem', gridColumn: '1 / -1', textAlign: 'center' }}>Loading history database...</div>
             ) : historyList.length === 0 ? (
