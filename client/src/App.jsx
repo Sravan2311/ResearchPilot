@@ -618,7 +618,7 @@ function App() {
               }}
             >
               <User size={15} style={{ color: 'var(--primary)' }} />
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{username}</span>
+              <span className="hide-on-mobile" style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{username}</span>
             </button>
 
             {showProfile && (
@@ -680,7 +680,7 @@ function App() {
               }}
             >
               <Settings size={16} />
-              LLM Settings
+              <span className="hide-on-mobile">LLM Settings</span>
             </button>
             
             {showSettings && (

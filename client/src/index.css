@@ -886,4 +886,8 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.4rem 0.75rem;
     font-size: 0.8rem;
   }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
 }
