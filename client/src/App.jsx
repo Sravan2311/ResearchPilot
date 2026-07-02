@@ -610,7 +610,7 @@ function App() {
 
         <div className="api-settings" style={{ gap: '1rem' }}>
           {/* User Profile Button + Dropdown */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative' }} className="hide-on-mobile">
             <button 
               className="input-pill" 
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', background: showProfile ? 'var(--bg-tertiary)' : 'var(--glass-bg)' }}
@@ -673,7 +673,7 @@ function App() {
           </div>
 
           {/* Settings Button + Floating Dropdown */}
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative' }} className="hide-on-mobile">
             <button 
               className="input-pill" 
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', background: showSettings ? 'var(--bg-tertiary)' : 'var(--glass-bg)' }}
@@ -688,53 +688,49 @@ function App() {
             </button>
             
             {showSettings && (
-              <div 
-                className="glass-panel" 
-                style={{ 
-                  position: 'absolute', 
-                  top: 'calc(100% + 0.75rem)', 
-                  right: 0, 
-                  width: '300px', 
-                  padding: '1.25rem', 
-                  zIndex: 1010, 
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.85rem'
-                }}
-              >
-                <h4 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <Key size={14} style={{ color: 'var(--primary)' }} />
-                  LLM Settings
-                </h4>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-                  Configure custom API endpoints for local models (e.g. Ollama or LM Studio).
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', borderTop: '1px solid var(--glass-border)', paddingTop: '0.75rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem', fontWeight: 600 }}>API Key</label>
-                    <input 
-                      type="password" 
-                      placeholder="sk-..." 
-                      className="input-pill"
-                      style={{ width: '100%', fontSize: '0.8rem' }}
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem', fontWeight: 600 }}>Base URL</label>
-                    <input 
-                      type="text" 
-                      placeholder="http://localhost:11434/v1" 
-                      className="input-pill"
-                      style={{ width: '100%', fontSize: '0.8rem' }}
-                      value={baseUrl}
-                      onChange={(e) => setBaseUrl(e.target.value)}
-                    />
+              <>
+                <div className="modal-backdrop" onClick={() => setShowSettings(false)} />
+                <div 
+                  className="glass-panel header-dropdown-panel" 
+                  style={{ 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.85rem'
+                  }}
+                >
+                  <h4 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <Key size={14} style={{ color: 'var(--primary)' }} />
+                    LLM Settings
+                  </h4>
+                  <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+                    Configure custom API endpoints for local models (e.g. Ollama or LM Studio).
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', borderTop: '1px solid var(--glass-border)', paddingTop: '0.75rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem', fontWeight: 600 }}>API Key</label>
+                      <input 
+                        type="password" 
+                        placeholder="sk-..." 
+                        className="input-pill"
+                        style={{ width: '100%', fontSize: '0.8rem' }}
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem', fontWeight: 600 }}>Base URL</label>
+                      <input 
+                        type="text" 
+                        placeholder="http://localhost:11434/v1" 
+                        className="input-pill"
+                        style={{ width: '100%', fontSize: '0.8rem' }}
+                        value={baseUrl}
+                        onChange={(e) => setBaseUrl(e.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
 
@@ -809,6 +805,22 @@ function App() {
                 >
                   <User size={14} />
                   <span>User Profile</span>
+                </button>
+                <div style={{ borderTop: '1px solid var(--glass-border)', margin: '0.4rem 0' }}></div>
+                <button 
+                  className="nav-link"
+                  onClick={() => { setShowSettings(true); setShowMobileMenu(false); }}
+                >
+                  <Settings size={14} />
+                  <span>LLM Settings</span>
+                </button>
+                <button 
+                  className="nav-link"
+                  style={{ color: 'var(--error)' }}
+                  onClick={() => { handleSignOut(); setShowMobileMenu(false); }}
+                >
+                  <LogOut size={14} />
+                  <span>Sign Out</span>
                 </button>
               </div>
             )}

@@ -875,3 +875,44 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
 }
+
+.header-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  width: 300px;
+  padding: 1.25rem;
+  z-index: 1010;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.modal-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .header-dropdown-panel {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90vw !important;
+    max-width: 340px !important;
+    z-index: 2000 !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .modal-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1999;
+  }
+}
