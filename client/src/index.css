@@ -804,40 +804,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 900px) {
-  .app-container {
+  .main-body-container {
     flex-direction: column;
+    height: auto;
+    overflow-y: auto;
   }
   
   .app-sidebar {
     width: 100%;
     height: auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(10, 10, 18, 0.45);
   }
-  
-  .brand-section {
-    margin-bottom: 0;
-    flex-direction: row;
-    align-items: center;
-  }
-  
+
   .sidebar-nav {
     flex-direction: row;
-    gap: 0.75rem;
-    margin-top: 0;
-    width: auto;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    width: 100%;
     overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none; /* Hide scrollbar for touch swipe */
   }
   
+  .sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .nav-link {
-    font-size: 0.85rem;
+    font-size: 0.825rem;
     padding: 0.5rem 0.75rem;
     width: auto;
+    white-space: nowrap;
   }
-  
+
   .nav-link::after {
     left: 15%;
     bottom: 0;
@@ -850,5 +855,35 @@ h1, h2, h3, h4, h5, h6 {
   
   .nav-link.active::after {
     transform: scaleX(1);
+  }
+
+  .main-content {
+    padding: 1.25rem;
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 1rem;
+    height: 60px;
+  }
+  
+  .brand-logo {
+    font-size: 1.2rem;
+  }
+  
+  .brand-badge {
+    display: none; /* Hide badge to save screen estate */
+  }
+
+  .api-settings {
+    gap: 0.5rem;
+  }
+
+  .input-pill {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
